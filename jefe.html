@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Server Jefe</title>
+    <!-- Bootstrap -->
+<link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!--Datatable-->
+ 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script  type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <link rel="stylesheet"  type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link  rel="stylesheet"  type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
+
+
+
+ 
+
+
+
+</head>
+<body>
+    <div class="container" id="container">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(238, 238, 238);">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Maintenance Server Jefe</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item"  >
+                    <button class="btn btn-primary me-2" type="button" id="btn-tickets">Asignar Tickets</button>
+                  </li>
+                  <li class="nav-item" >
+                    <button class="btn btn-primary me-2"  type="button" id="btn-ticket">Estado de ticket</button>
+                  </li>
+                  <!--Drop inicio-->
+                  <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Ver
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Usuarios</a></li>
+                      <li><a class="dropdown-item" href="#">Tickets</a></li>
+                    </ul>
+                  </li>
+                  <!-- Drop fin-->
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <div class="screen " id="screen">
+         
+            
+          <!-- Tabla que muestra los tickets generados-->
+          
+          <div class="table-responsive p-3" id="table">
+            <div class="bg-white p-3">
+
+            
+            <table id="example" class="table table-striped"  style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Puesto</th>
+                        <th>Estado</th>
+                        <th>Descripcion</th>
+                        <th>Empleado Asignado</th>
+                        <th>Asignar</th>
+                    </tr>
+                </thead>
+              
+                <tfoot>
+                  <tr>
+                      <th>Nombre</th>
+                      <th>Puesto</th>
+                      <th>Estado</th>
+                      <th>Descripcion</th>
+                      <th>Empleado Asignado</th>
+                      <th>Asignar</th>
+                  </tr>
+              </tfoot>
+            </table>
+          </div>
+          </div>
+            
+        </div>
+
+    </div>
+    <script type="module" src="./jefe.js"></script>
+     
+</body>
+</html>
+
+
+<style>
+
+    
+
+    #form-user{
+      display: none;
+      margin: auto;
+    }
+
+    #table{
+      display: none;
+    }
+    
+    
+    #form-ticket{
+      display: none;
+    }
+
+    .screen {
+        background-color: rgb(238, 238, 238);
+        margin-top: 2%;
+        height: 50rem;
+        
+        
+    }
+
+</style>

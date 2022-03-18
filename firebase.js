@@ -2,7 +2,7 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-app.js";
 
-  import { getFirestore, collection, addDoc, getDocs, onSnapshot,doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js"
+  import { getFirestore, collection, addDoc, getDocs, onSnapshot,doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.6/firebase-firestore.js"
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,19 +23,22 @@
   const db = getFirestore()
 
   
-  export const saveTask = (nombre, apellido, dni, telefono, direccion) => {
-    addDoc(collection(db, 'Usuarios'), { Nombre: nombre, Apellido: apellido, DNI: dni, Telefono: telefono, Direccion: direccion })
+  export const saveTask = (nombre, apellido, dni, telefono, direccion, contraseña, cargo, sector) => {
+    addDoc(collection(db, 'Usuarios'), { Nombre: nombre, Apellido: apellido, DNI: dni, Telefono: telefono, Direccion: direccion, contraseña: contraseña,
+    cargo: cargo, sector: sector })
     
 }
 
-  export const saveTicket = (dniT, puesto, descripcion) => {
-    addDoc(collection(db, 'Tickets'), {DNI: dniT, Puesto: puesto, Descripcion: descripcion})
+  export const saveTicket = (dniT, puesto, descripcion, estado, empleado) => {
+    addDoc(collection(db, 'Tickets'), {DNI: dniT, Puesto: puesto, Descripcion: descripcion, estado: estado, empleado: empleado})
   }
 
   export const onGetTasks = (callback) =>
   onSnapshot(collection(db, 'Tickets'), callback);
 
   export const getTasks = () => getDocs(collection(db, 'Tickets'));
+
+  export const deleteTask = (id) => deleteDoc(doc(db, 'Tickets', id));
   
 
   export const onGetUser = (callback) =>

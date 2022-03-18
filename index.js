@@ -1,84 +1,27 @@
-import { saveTask, saveTicket, onGetTasks, getTasks, getUser, onGetUser } from './firebase.js'
+import { saveTask, saveTicket, onGetTasks, getTasks, getUser, onGetUser, deleteTask } from './firebase.js'
 
 const screen = document.getElementById('screen')
 const subtitle = document.getElementById('sub-title')
 const container = document.getElementById('container')
 const btnUser = document.getElementById('btn-user')
 const btnTicket = document.getElementById('btn-ticket')
+const ticketsContainer = document.getElementById('tickets-generator')
+const clientes = document.getElementById('clientes')
+const divGenerarTicket = document.getElementById('generarTicket')
 
 
 
 
 mostrarTickets();
   
-
+//BOTON REGISTRAR USUARIO
 btnUser.addEventListener('click', e => {
     e.preventDefault()
-    screen.innerHTML = ''
- 
-    screen.innerHTML += `
-        <div style="padding-top: 15%; padding-left: 25%">
-            <div class="card border-primary "  style="width: 40rem; padding-left: 1rem; padding-right: 1rem;">
-                <div class="card-body">
-                    <form id="form-user "  >
-                        <h2 class="mb-3" style="padding-left: 10rem;"> Registrar Usuario</h2>
-                        <div class="row">
-                            <div class="col"> 
-                                <label for="name">Nombre:</label> 
-                            </div>
-                            <div class="col">
-                                <label for="apellido">Apellido:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-4">
-                                <input class="w-100 " type="text" placeholder="Gustavo" id="input-name">
-                            </div>
-                            <div class="col mb-4">
-                                <input class="w-100" type="text" placeholder="Gomez" id="input-apellido">
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col ">
-                                <label for="dni">DNI:</label>
-                            </div>
-                            <div class="col">
-                                <label for="tel">Telefeno:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-4">
-                                <input class="w-100 " type="text" placeholder="43059659" id="input-dni">
-                            </div>
-                            <div class="col mb-4">
-                                <input class="w-100" type="text" placeholder="117432848" id="input-tel">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col ">
-                                <label for="direccion">Dirección:</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-4">
-                                <input class=" w-100 " type="text" placeholder="Rio de Janeiro 147" id="input-dire" style="width: 20rem;">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col ">
-                                <button class="btn btn-primary btn-sent" id="btn-sent" style="float: right; " >Registrar</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    `;
+    document.getElementById('form-ticket').style.display = 'none';
+    ticketsContainer.innerHTML = ''
+    document.getElementById('form-user').style.display = 'block';
     const userForm = document.getElementById('form-user')
-
+    
 
 
 //Events
@@ -92,70 +35,59 @@ userForm.addEventListener('submit', (e) => {
     const dni = userForm['input-dni']
     const tel = userForm['input-tel']
     const direccion = userForm['input-dire']
+    const contra = userForm['input-contra']
+    const cargo = userForm['select-cargo']
+    const sector = userForm['select-sector']
 
-    saveTask(nombre.value, apellido.value, dni.value, tel.value, direccion.value)
+    saveTask(nombre.value, apellido.value, dni.value, tel.value, direccion.value, contra.value, cargo.value, sector.value)
 
     userForm.reset()
 })
 
 })
 
-
+// BOTON GENERAR TICKET
 btnTicket.addEventListener('click', e => {
+    //screen.innerHTML = ''
     e.preventDefault()
-    screen.innerHTML = ''
-    screen.innerHTML += `
-    <div style="padding-top: 15%; padding-left: 25%;">
-        <div class="card border-primary "  style="width: 40rem; padding-left: 1rem; padding-right: 1rem;">
-            <div class="card-body ">
-                <form id="form-ticket" >
-                    <h2 class="mb-3" style="padding-left: 10rem;">Generar Ticket</h2>
-                    <div class="row">
-                        <div class="col">
-                            <label for="ticket-dni">DNI:</label>
-                        </div>
-                        <div class="col">
-                            <label for="cat">Categoria:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-4"> 
-                                
-                            <input class="" type="text" placeholder="43096584" id="input-dni-ticket">
-                        </div>
-                        <div class="col"> 
-                                
-                        <select class="form-select" id="select-puesto" aria-label="Floating label select example">
-                                <option selected>Seleccione su area</option>
-                                <option value="Maquinista">Maquinista</option>
-                                <option value="Administracion">Administracion</option>
-                                <option value="Industrial">Industrial</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col">
-                            <label for="ticket-desc" style="">Descripción:</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-4">
-                            <textarea class="form-control" placeholder="Explique su problema" id="input-desc-ticket" style="height: 100px"></textarea>
-                           
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col" >
-                            <button type="button" class="btn btn-primary" id="btnTicket" style="float: right; ">Generar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    document.getElementById('form-user').style.display = 'none';
+    ticketsContainer.innerHTML = ''
+    let all_users = [];
+    getUser().then((collection)=>{
+        
+    // collection.docs.forEach((doc)=>all_users.push(doc.data()))
+    console.log(collection.docs);
+    all_users = collection.docs.flatMap((doc)=>{
+        
+        if(doc.data().Apellido=='') return [];
+        return {
+            name:doc.data().Nombre,
+            surname: doc.data().Apellido,
+            dni: doc.data().DNI,
+
+            toString(){
+                return `${this.surname} ${this.name}`
+            }
+        }
+    });
+
+    console.log(all_users);
     
-    `;
+    document.getElementById('form-ticket').style.display = 'block';
+    
+    all_users.forEach((u)=>{
+        let option = document.createElement('option');
+        option.innerText = u.toString();
+        option.value = u.dni;
+        option.onclick = function (event){
+            console.log(event.target.value)
+        };
+        
+        document.getElementById('divsito').appendChild(option);
+    })
+})
+
+
 
     const ticketForm = document.getElementById('form-ticket')
     const btnTicket = document.getElementById('btnTicket')
@@ -166,7 +98,7 @@ btnTicket.addEventListener('click', e => {
         e.preventDefault()
         
         
-        const dniT = ticketForm['input-dni-ticket']
+        const dniT = ticketForm['divsito']
         const puesto = ticketForm['select-puesto']
         const descripcion = ticketForm['input-desc-ticket']
         
@@ -182,60 +114,55 @@ btnTicket.addEventListener('click', e => {
 })
 
 
+//FUNCION TABLAS
+async function mostrarTickets(){
 
-function mostrarTickets(){
+
+const usersCollection = await getUser();
     
-    const ticketsContainer = document.getElementById('tickets')
-    var nombreTicket = null
-    var apellido = null
-    window.addEventListener("DOMContentLoaded", async () => {
-        
-        onGetTasks((querySnapshot) => {
-            ticketsContainer.innerHTML = "";
-            
-            querySnapshot.forEach((doc) => {
-                const ticket =  doc.data();
+// // let users = usersCollection.docs.map((doc)=>doc.data());
+let users = {};
+usersCollection.docs.forEach((doc)=>{users[doc.data().DNI] = doc.data()});
 
+// users.find((user)=>user.DNI === "43096637");
+// console.log(users["43096637"]);
+
+
+const tasksCollection = await getTasks();
+tasksCollection.docs.forEach((task)=>{
+    let empleado = 'Sin asignar';
+    
+    if(users[task.data().DNI]!== undefined){
+        empleado = `${users[task.data().DNI].Nombre} ${users[task.data().DNI].Apellido}`;
+        
+    }else if(empleado === 'Sin asignar'){
+        //console.log(task.id)
+       deleteTask(task.id)
+
+    }
+    
+    
+    
+    //console.log(`Tarea: ${task.data().Descripcion} para el empleado ${empleado} (${task.data().Puesto})`); 
+
+    //console.log(empleado)
+    ticketsContainer.innerHTML += `
                 
-                onGetUser((querySnapshot) => {
-                    querySnapshot.forEach((user) =>{
-                        const userData = user.data()
-                        
-                        if(ticket.DNI == userData.DNI){
-                            console.log(ticket.DNI + ' == ' + userData.DNI)
-                            console.log(doc.data())
-                            nombreTicket = userData.Nombre
-                            apellido = userData.Apellido
-                            console.log(nombreTicket)
-                            console.log(apellido)
-                        }
-                    })
-                })
-                console.log(nombreTicket)
-                
-                ticketsContainer.innerHTML += `
-                
-                <div class="row">
-                    <div class="col border border-primary" style="bo">
-                        ${nombreTicket}
-                    </div>
-                    <div class="col border border-primary" style="bo">
-                        ${apellido}
-                    </div>
-                    <div class="col border border-primary" style="bo">
-                        ${ticket.DNI}
-                    </div>
-                    <div class="col border border-primary">
-                        ${ticket.Puesto}
-                    </div>
-                    <div class="col border border-primary">
-                        ${ticket.Descripcion}
-                    </div>
-                </div>
-                `;
-            })
-        })
-    })
+  <table class="table">
+    
+    <tbody id="tabla1">
+            <tr>
+            <th scope="row">1</th>
+            <td>${empleado}</td>
+            <td>${task.data().Puesto}</td>
+            <td>${task.data().Descripcion}</td>
+            </tr>
+    </tbody>
+  </table>
+
+    `;
+});
+    
 }
 
 

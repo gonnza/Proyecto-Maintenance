@@ -12,7 +12,7 @@
     <div class="container" id="container">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(238, 238, 238);">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">Maintenance Server</a>
+              <a class="navbar-brand" href="#">Maintenance Server Admin</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -40,15 +40,171 @@
             </div>
           </nav>
         <div class="screen " id="screen">
+          <!-- Formulario Registro de clientes-->
+          <div class="clientes "  id="clientes">
+              
+            <form id="form-user"  >
+              <div class="contenedor" style="padding-top: 15%; padding-left: 25%;" >
+                <div class="card border-primary "  style="width: 40rem; ">
+                  <div class="card-header text-center">
+                    <h2 class="mb-3" > Registrar Usuario</h2>
+                  </div>
+                    <div class="card-body">
+                      
+                      <div class="row">
+                          <div class="col"> 
+                              <label for="name">Nombre:</label> 
+                          </div>
+                          <div class="col">
+                              <label for="apellido">Apellido:</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col mb-4">
+                              <input class="w-100 " type="text" placeholder="Gustavo" id="input-name">
+                          </div>
+                          <div class="col mb-4">
+                              <input class="w-100" type="text" placeholder="Gomez" id="input-apellido">
+                          </div>
+                      </div>
+
+
+                      <div class="row">
+                          <div class="col ">
+                              <label for="dni">DNI:</label>
+                          </div>
+                          <div class="col">
+                              <label for="tel">Telefeno:</label>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col mb-4">
+                              <input class="w-100 " type="text" placeholder="43059659" id="input-dni">
+                          </div>
+                          <div class="col mb-4">
+                              <input class="w-100" type="text" placeholder="117432848" id="input-tel">
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col ">
+                              <label for="direccion">Dirección:</label>
+                          </div>
+                          <div class="col ">
+                            <label for="direccion">Contraseña:</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                          <div class="col mb-4">
+                              <input class=" w-100 " type="text" placeholder="Rio de Janeiro 147" id="input-dire" style="width: 20rem;">
+                          </div>
+                          <div class="col mb-4">
+                            <input class=" w-100 " type="password"  id="input-contra" style="width: 20rem;">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <label for="direccion">Cargo:</label>
+                        </div>
+                        <div class="col">
+                          <label for="direccion">Sector:</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col">
+                          <select class="form-select" id="select-cargo" aria-label="Floating label select example">
+                            <option selected>Seleccione cargo</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="Jefe">Jefe</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                        </div>
+                        <div class="col">
+                          <select class="form-select" id="select-sector" aria-label="Floating label select example">
+                            <option selected>Seleccione sector</option>
+                            <option value="Mantenimiento">Mantenimiento</option>
+                            <option value="Sistemas">Sistemas</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Gerencia">Gerencia</option>
+                        </select>
+                        </div>
+                        <div class="row">
+                          <div class="col ">
+                              <button class="btn btn-primary btn-sent mt-3" id="btn-sent" style="float: right; " >Registrar</button>
+                          </div>
+                      </div>
+                      </div>
+                    </div>  
+                </div>
+              </div>
+              </form>
+          </div>
+
+          <!-- Formulario Generar Tickets-->
+          <div class="generarTicket" id="generarTicket">
+              <form id="form-ticket">
+                <div style="padding-top: 15%; padding-left: 25%;">
+                  <div class="card border-primary "  style="width: 40rem;">
+                      
+                          <div class="card-header text-center">
+                            <h2 class="mb-3" >Generar Ticket</h2>
+                          </div>
+                          <div class="card-body ">
+                              <div class="row">
+                                  <div class="col">
+                                      <label for="ticket-dni">Cliente:</label>
+                                  </div>
+                                  <div class="col">
+                                      <label for="cat">Categoria:</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col mb-4"> 
+                                          
+                                      <select class="form-select" id="divsito"></select>
+                                  </div>
+                                  <div class="col"> 
+                                          
+                                  <select class="form-select" id="select-puesto" aria-label="Floating label select example">
+                                          <option selected>Seleccione el area de su problema</option>
+                                          <option value="Maquinista">Mecánica</option>
+                                          <option value="Administracion">Sistemas</option>
+                                          <option value="Industrial">Administración</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              
+                              <div class="row">
+                                  <div class="col">
+                                      <label for="ticket-desc" >Descripción:</label>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col mb-4">
+                                      <textarea class="form-control" placeholder="Explique su problema" id="input-desc-ticket" style="height: 100px"></textarea>
+                                    
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col" >
+                                      <button type="button" class="btn btn-primary" id="btnTicket" style="float: right; ">Generar</button>
+                                  </div>
+                              </div>
+                          
+                      </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+            
+          <!-- Tabla que muestra los tickets generados-->
+          <div class="tabla" id="tickets-generator">
             <div class="row">
+              <div class="col-1">
+                <h5>#</h5>
+              </div>
               <div class="col">
                 <h5>NOMBRE</h5>
-              </div>
-              <div class="col">
-                <h5>APELLIDO</h5>
-              </div>
-              <div class="col">
-                  <h5>DNI</h5>
               </div>
               <div class="col">
                   <h5>PUESTO</h5>
@@ -57,10 +213,10 @@
                   <h5>DESCRIPCIÓN</h5>
               </div>
             </div>
-            <div class="tickets" id="tickets" >
-                
-            </div>
-            <div class="clientes" id="clientes" ></div>
+          </div>
+            
+            
+            
         </div>
     </div>
     <script type="module" src="./index.js"></script>
@@ -69,15 +225,34 @@
 
 
 <style>
+
+    #form-user{
+      display: none;
+      margin: auto;
+    }
+
     
-    .screen{
+    
+    #form-ticket{
+      display: none;
+    }
+
+    .screen {
         background-color: rgb(238, 238, 238);
         margin-top: 2%;
-        width: 100%;
         height: 50rem;
+        
         
     }
 
+
+    
+
+    
+    
+
+    
+    
     
 
 </style>
